@@ -14,7 +14,7 @@
 <body>
     <!-- Navigation Buttons -->
     <a href="login.php" class="top-left-back">← Back</a>
-    <a href="../index.php" class="top-right-link">🏠 Home</a>
+    <a href="../index.html" class="top-right-link">🏠 Home</a>
 
     <!-- Signup Form Container -->
     <div class="login-container">

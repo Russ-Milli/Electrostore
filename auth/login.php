@@ -14,7 +14,7 @@
 <body>
 
     <!-- Top-right Home button -->
-    <a href="../index.php" class="top-right-link">🏠 Home</a>
+    <a href="../index.html" class="top-right-link">🏠 Home</a>
 
     <!-- Centered login form -->
     <div class="login-container">
