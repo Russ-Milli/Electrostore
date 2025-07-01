@@ -34,17 +34,18 @@ CREATE TABLE purchases (
     FOREIGN KEY (product_id) REFERENCES products(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Sample data
+-- Insert sample products
 INSERT INTO products (name, description, price, stock) VALUES
 ('Smartphone X', 'Latest smartphone with 128GB storage', 699.99, 50),
 ('Wireless Earbuds', 'Noise cancelling Bluetooth earbuds', 129.99, 100),
 ('Laptop Pro', '15-inch laptop with 16GB RAM', 999.99, 30);
 
-INSERT INTO purchases (user_id, product_id, quantity, purchase_price) VALUES 
-(2, 1, 1, 999.99),
-(2, 3, 2, 199.99);
-
+-- Insert sample users
 INSERT INTO users (username, email, password_hash) VALUES 
 ('admin', 'admin@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'),
 ('john_doe', 'john@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
 
+-- Insert purchases 
+INSERT INTO purchases (user_id, product_id, quantity, total_price) VALUES 
+(2, 1, 1, 999.99),
+(2, 3, 2, 199.99);

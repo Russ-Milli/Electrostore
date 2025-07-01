@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-require_once 'config/database.php';
+require_once 'database_conn.php';
 $database = new Database();
 $db = $database->connect();
 ?>
