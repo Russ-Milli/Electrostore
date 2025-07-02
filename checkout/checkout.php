@@ -93,7 +93,9 @@ $isLoggedIn = isset($_SESSION['user_id']);
         div > form > button { padding: 10px 20px;   color: #fff; background-color: #28a745;border-color: #28a745; border: none; border-radius: 3px; cursor: pointer; }
         .alert { padding: 10px; background: #dff0d8; color: #3c763d; margin-top: 20px; border-radius: 5px; }
         .error { color: red; }
+        
     </style>
+ 
 </head>
 
 
@@ -122,6 +124,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
         <h4>Total: <strong>$<?php echo number_format($total, 2); ?></strong></h4>
 
         <p><a href="../cartpg.php" style="text-decoration:none; color:#007bff;">&larr; Back to Cart</a></p>
+        
     </div>
 
 
@@ -177,7 +180,6 @@ $isLoggedIn = isset($_SESSION['user_id']);
         }
         ?>
     </div>
-
 </div>
 
 <!-- jQuery and Bootstrap JS -->
