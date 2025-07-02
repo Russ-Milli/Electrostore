@@ -1,3 +1,7 @@
+<?php
+include_once 'auth_check.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -32,7 +36,7 @@
     <div class="container-fluid">
       <div class="row align-items-center py-3 px-xl-5">
         <div class="col-lg-3 d-none d-lg-block">
-          <a href="" class="text-decoration-none">
+          <a href="index.php" class="text-decoration-none">
             <h1 class="m-0 display-6 font-weight-semi-bold">
               <span class="text-primary font-weight-bold border px-3 mr-1"
                 >E</span
@@ -42,7 +46,7 @@
         </div>
 
         <div class="col-lg-1">
-          <a href="cart.html" class="btn border">
+          <a href="cartpg.php" class="btn border">
             <i class="fas fa-shopping-cart text-primary"></i>
             <span class="badge"></span>
           </a>
@@ -71,8 +75,8 @@
               id="navbarCollapse"
             >
               <div class="navbar-nav mr-auto py-0">
-                <a href="index.html" class="nav-item nav-link">Home</a>
-                <a href="cartpg.html" class="nav-item nav-link active"
+                <a href="index.php" class="nav-item nav-link">Home</a>
+                <a href="cartpg.php" class="nav-item nav-link active"
                   >Shopping Cart</a
                 >
                 <a href="contact.html" class="nav-item nav-link">Contact</a>
