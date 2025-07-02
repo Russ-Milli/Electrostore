@@ -1,6 +1,11 @@
--- Create database
+-- Create database if not exists and use it
 CREATE DATABASE IF NOT EXISTS electrostore;
 USE electrostore;
+
+-- Drop tables if they exist (in order to avoid foreign key constraint issues)
+DROP TABLE IF EXISTS purchases;
+DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS users;
 
 -- Users table 
 CREATE TABLE users (
@@ -18,7 +23,7 @@ CREATE TABLE products (
     name VARCHAR(100) NOT NULL,
     description TEXT,
     price DECIMAL(10,2) NOT NULL,
-    stock INT NOT NULL DEFAULT 0,
+    image_path VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -30,21 +35,17 @@ CREATE TABLE purchases (
     quantity INT NOT NULL,
     total_price DECIMAL(10,2) NOT NULL,
     purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (product_id) REFERENCES products(id)
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Sample data
-INSERT INTO products (name, description, price, stock) VALUES
-('Smartphone X', 'Latest smartphone with 128GB storage', 699.99, 50),
-('Wireless Earbuds', 'Noise cancelling Bluetooth earbuds', 129.99, 100),
-('Laptop Pro', '15-inch laptop with 16GB RAM', 999.99, 30);
-
-INSERT INTO purchases (user_id, product_id, quantity, purchase_price) VALUES 
-(2, 1, 1, 999.99),
-(2, 3, 2, 199.99);
-
-INSERT INTO users (username, email, password_hash) VALUES 
-('admin', 'admin@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'),
-('john_doe', 'john@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi');
-
+-- Insert sample products
+INSERT INTO products (name, description, price, image_path) VALUES
+('HP Pavilion 13.3', 'A sleek and lightweight laptop designed for portability and performance. The HP Pavilion 13.3" delivers crisp visuals, fast processing, and long battery life—perfect for students, professionals, and on-the-go users.', 699, 'img/laptop1.jpg'),
+('HP 15 Notebook', 'Combining everyday reliability with solid performance, the HP 15 Notebook is ideal for work, school, or home use. Enjoy a spacious display, responsive computing, and dependable battery life in one affordable package.', 799, 'img/laptop2.jpg'),
+('Hp Desktop Elite core i5', 'Built for business and multitasking, the HP Elite Desktop with Intel Core i5 processor delivers robust performance in a compact design. A perfect choice for office productivity, data tasks, and smooth daily computing.', 1299, 'img/pc1.jpg'),
+('HP Pavilion Gaming TG01', 'Unleash your gaming potential with the HP Pavilion TG01 Gaming Desktop. Powered by advanced graphics and high-speed processors, it’s built to handle modern games and creative workloads without compromise.', 1499, 'img/pc2.jpg'),
+('HP Pro Tablet 10 EE G1', 'Engineered for education and field use, the HP Pro Tablet 10 EE G1 combines durability with enterprise-grade features. With stylus support and Windows integration, it''s a smart tool for learning and productivity.', 499, 'img/tab1.jpeg'),
+('HP Elite x2 1012 G2', 'Versatile and powerful, the HP Elite x2 1012 G2 is a 2-in-1 device that adapts to your workflow. With detachable keyboard, touchscreen, and business-class security, it''s the ideal companion for mobile professionals.', 699, 'img/tab2.png'),
+('HP LaserJet Pro MFP', 'Print, scan, copy, and fax with ease using the HP LaserJet Pro MFP. This all-in-one laser printer delivers fast, high-quality output and is designed to keep your office running smoothly and efficiently.', 449, 'img/printer1.jpg'),
+('HP Officejet 3830', 'A compact all-in-one inkjet printer perfect for home or small office use. The HP OfficeJet 3830 offers wireless printing, quiet operation, and mobile compatibility at a great value.', 299, 'img/printer2.png');
