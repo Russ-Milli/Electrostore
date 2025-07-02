@@ -1,5 +1,8 @@
 <?php
-require 'database_connection.php';
+require 'database_conn.php';
+
+$db = new Database();
+$pdo = $db->connect();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username']);

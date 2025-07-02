@@ -1,3 +1,50 @@
+<?php
+session_start();
+
+if (isset($_SESSION['user_id'])) {
+    // User is already logged in, redirect to home
+    header("Location: /Electrostore/index.php");
+    exit();
+}
+
+require_once '../database_conn.php';
+
+$error = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $identifier = trim($_POST['identifier']);
+    $password = trim($_POST['password']);
+
+    if (empty($identifier) || empty($password)) {
+        $error = "Please fill in all fields.";
+    } else {
+        $database = new Database();
+        $db = $database->connect();
+
+        $isEmail = filter_var($identifier, FILTER_VALIDATE_EMAIL);
+        $query = $isEmail
+            ? "SELECT id, username, email, password_hash FROM users WHERE email = :identifier"
+            : "SELECT id, username, email, password_hash FROM users WHERE username = :identifier";
+
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(':identifier', $identifier);
+        $stmt->execute();
+
+        if ($stmt->rowCount() === 1) {
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            if (password_verify($password, $user['password_hash'])) {
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['username'] = $user['username'];
+                header("Location: /Electrostore/index.php");
+                exit();
+            }
+        }
+
+        $error = "Invalid username/email or password.";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,14 +61,21 @@
 <body>
 
     <!-- Top-right Home button -->
-    <a href="../index.html" class="top-right-link">🏠 Home</a>
+    <a href="../index.php" class="top-right-link">🏠 Home</a>
 
     <!-- Centered login form -->
     <div class="login-container">
         <!-- Heading aligned to right but close to form -->
         <div class="form-heading">Login to ElectroStore</div>
 
-        <form onsubmit="return validateLogin()" method="POST" action="login_process.php">
+        <!-- Display login error if any -->
+        <?php if (!empty($error)): ?>
+            <div class="error-message" style="color: red; margin-bottom: 1rem;">
+                <?= htmlspecialchars($error) ?>
+            </div>
+        <?php endif; ?>
+
+        <form onsubmit="return validateLogin()" method="POST" action="login.php">
             <label for="identifier" class="visually-hidden">Email or Username</label>
             <input type="text" id="identifier" name="identifier" placeholder="Email or Username" required>
 
