@@ -190,6 +190,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <?php endif; ?>
         </tbody>
       </table>
+          <?php if (!empty($_SESSION['cart'])): ?>
+            <div class="d-flex justify-content-end mt-3">
+              <a href="checkout/checkout.php" class="btn btn-success btn-block border-0 py-3">Proceed to Checkout</a>
+            </div>
+          <?php endif; ?>
     </div>
   </main>
 

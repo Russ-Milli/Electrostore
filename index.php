@@ -145,6 +145,7 @@ if (isset($_GET['login_required'])) {
                         </div>
                     </div>
                 </nav>
+
                 <div id="header-carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active" style="height: 410px;">
