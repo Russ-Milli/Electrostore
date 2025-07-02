@@ -49,9 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
         $_SESSION['cart'][] = $item;
     }
 
-    // Redirect to cart page after adding
-    header('Location: cartpg.php');
-    exit();
+    $success_message = "Product added to cart!";
 }
 ?>
 
@@ -72,6 +70,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
     <small class="text-white-50 ms-2 me-auto">Your Trusted HP Partner</small>
   </div>
 </nav>
+
+<?php if (!empty($success_message)): ?>
+    <div class="container mt-3">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?= htmlspecialchars($success_message) ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    </div>
+<?php endif; ?>
 
 <!-- 🖥️ Product Section with Light Background -->
 <div class="bg-light py-5">
@@ -115,5 +122,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'])) {
   &copy; 2025 ElectroStore. All rights reserved.
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

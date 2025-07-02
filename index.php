@@ -15,6 +15,54 @@ $stmt = $conn->prepare($query);
 $stmt->execute();
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Handle add to cart
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'], $_POST['product_id'])) {
+    if (!isset($_SESSION['user_id'])) {
+        // Redirect back with login required message
+        header('Location: index.php?login_required=1');
+        exit();
+    }
+
+    $productId = (int)$_POST['product_id'];
+    $stmt = $conn->prepare("SELECT * FROM products WHERE id = ?");
+    $stmt->execute([$productId]);
+    $product = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($product) {
+        $item = [
+            'id' => $product['id'],
+            'name' => $product['name'],
+            'price' => $product['price'],
+            'quantity' => 1
+        ];
+
+        if (!isset($_SESSION['cart'])) {
+            $_SESSION['cart'] = [];
+        }
+
+        $found = false;
+        foreach ($_SESSION['cart'] as &$cart_item) {
+            if ($cart_item['id'] === $item['id']) {
+                $cart_item['quantity'] += 1;
+                $found = true;
+                break;
+            }
+        }
+        if (!$found) {
+            $_SESSION['cart'][] = $item;
+        }
+
+        header('Location: index.php?added=1');
+        exit();
+    }
+}
+
+$message = "";
+if (isset($_GET['login_required'])) {
+    $message = "You must be logged in to add items to the cart.";
+} elseif (isset($_GET['added'])) {
+    $message = "Product added to cart!";
+}
 ?>
 
 <!DOCTYPE html>
@@ -45,6 +93,13 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <body>
+
+    <?php if ($message): ?>
+        <div class="alert alert-<?= isset($_GET['login_required']) ? 'warning' : 'success' ?> text-center">
+            <?= htmlspecialchars($message) ?>
+        </div>
+    <?php endif; ?>
+
     <!-- Topbar Start -->
     <div class="container-fluid">
         <div class="row align-items-center py-3 px-xl-5">
@@ -182,10 +237,19 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                                 <i class="fas fa-eye text-primary mr-1"></i>
                                 View Detail
                             </a>
-                            <a href="#" class="btn btn-sm text-dark p-0">
-                                <i class="fas fa-shopping-cart text-primary mr-1"></i>
-                                Add To Cart
-                            </a>
+
+                            <form method="post" style="margin: 0; padding: 0;">
+                                <input type="hidden" name="product_id" value="<?= $product['id'] ?>">
+                                <button
+                                    type="submit"
+                                    name="add_to_cart"
+                                    class="btn btn-sm text-dark p-0"
+                                    style="background: none; border: none; cursor: pointer;"
+                                >
+                                    <i class="fas fa-shopping-cart text-primary mr-1"></i>
+                                    Add To Cart
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -193,7 +257,6 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
     <!-- Products End -->
-
 
 
     <!-- Footer Start -->
