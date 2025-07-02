@@ -10,7 +10,7 @@ $db = new Database();
 $conn = $db->connect();
 
 // Fetch 8 products
-$query = "SELECT name, price, image_path FROM products LIMIT 8";
+$query = "SELECT id, name, price, image_path FROM products LIMIT 8";
 $stmt = $conn->prepare($query);
 $stmt->execute();
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -178,8 +178,14 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             </div>
                         </div>
                         <div class="card-footer d-flex justify-content-between bg-light border">
-                            <a href="#" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
-                            <a href="#" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart</a>
+                            <a href="productpg.php?id=<?= $product['id'] ?>" class="btn btn-sm text-dark p-0">
+                                <i class="fas fa-eye text-primary mr-1"></i>
+                                View Detail
+                            </a>
+                            <a href="#" class="btn btn-sm text-dark p-0">
+                                <i class="fas fa-shopping-cart text-primary mr-1"></i>
+                                Add To Cart
+                            </a>
                         </div>
                     </div>
                 </div>
