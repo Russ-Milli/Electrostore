@@ -7,11 +7,44 @@ $conn = $database->connect(); // Get PDO connection
 
 $cart = $_SESSION['cart'] ?? [];
 $total = 0;
+
+$isLoggedIn = isset($_SESSION['user_id']);
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
+
+<!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon" />
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Libraries Stylesheet -->
+    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- Font Awesome -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+
+<!-- Owl Carousel (optional, for product sliders) -->
+<link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="css/style.css" rel="stylesheet" />
+
     <title>Checkout</title>
     <style>
         body { font-family: Arial, sans-serif; padding: 20px; background: #f9f9f9; }
@@ -57,13 +90,14 @@ $total = 0;
 
         label { display: block; margin-bottom: 5px; font-weight: bold; }
         input { width: 100%; padding: 8px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 3px; }
-        button { padding: 10px 20px;   color: #fff; background-color: #28a745;border-color: #28a745; border: none; border-radius: 3px; cursor: pointer; }
+        div > form > button { padding: 10px 20px;   color: #fff; background-color: #28a745;border-color: #28a745; border: none; border-radius: 3px; cursor: pointer; }
         .alert { padding: 10px; background: #dff0d8; color: #3c763d; margin-top: 20px; border-radius: 5px; }
         .error { color: red; }
     </style>
 </head>
-<body>
 
+
+<body>
 <div class="checkout-container">
 
     <div class="order-summary">
@@ -145,6 +179,11 @@ $total = 0;
     </div>
 
 </div>
+
+<!-- jQuery and Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 </html>

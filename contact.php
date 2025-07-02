@@ -1,3 +1,15 @@
+<?php
+include_once 'auth_check.php';  // Make sure user is logged in
+
+// Initialize cart if not set
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+
+$isLoggedIn = isset($_SESSION['user_id']);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -7,7 +19,7 @@
     <meta content="Free HTML Templates" name="keywords" />
     <meta content="Free HTML Templates" name="description" />
 
-    <!-- Favicon -->
+    <!--Favicon-->
     <link href="img/favicon.ico" rel="icon" />
 
     <!-- Google Web Fonts -->
@@ -55,37 +67,34 @@
     <!-- Topbar End -->
 
     <!-- Navbar Start -->
-    <div class="container-fluid mb-3">
-      <div class="row align-items-center justify-content-center">
-        <div class="col-lg-11">
-          <nav
-            class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0"
-          >
-            <button
-              type="button"
-              class="navbar-toggler"
-              data-toggle="collapse"
-              data-target="#navbarCollapse"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div
-              class="collapse navbar-collapse justify-content-between"
-              id="navbarCollapse"
-            >
-              <div class="navbar-nav mr-auto py-0">
-                <a href="index.php" class="nav-item nav-link active">Home</a>
-                <a href="cartpg.php" class="nav-item nav-link">Shopping Cart</a>
-                <a href="contact.html" class="nav-item nav-link">Contact</a>
+    <div class="container-fluid mb-2">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-lg-11">
+            <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+              <a href="" class="text-decoration-none d-block d-lg-none">
+                  <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>lectrostore</h1>
+              </a>
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                  <div class="navbar-nav mr-auto py-0">
+                      <a href="index.php" class="nav-item nav-link">Home</a>
+                      <a href="cartpg.php" class="nav-item nav-link">Shopping Cart</a>
+                      <a href="contact.php" class="nav-item nav-link active">Contact</a>
+                  </div>
+                  <div class="navbar-nav ml-auto py-0">
+                      <?php if ($isLoggedIn): ?>
+                          <a href="logout.php" class="nav-item nav-link">Logout</a>
+                      <?php else: ?>
+                          <a href="auth/login.php" class="nav-item nav-link">Login</a>
+                          <a href="auth/signup.php" class="nav-item nav-link">Register</a>
+                      <?php endif; ?>
+                  </div>
               </div>
-              <div class="navbar-nav ml-auto py-0">
-                <a href="auth/login.php" class="nav-item nav-link">Login</a>
-                <a href="auth/signup.php" class="nav-item nav-link">Register</a>
-              </div>
-            </div>
-          </nav>
+            </nav>
+          </div>
         </div>
-      </div>
     </div>
     <!-- Navbar End -->
 
@@ -241,7 +250,7 @@
                 <a class="text-dark mb-2" href="cartpg.php"
                   ><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a
                 >
-                <a class="text-dark" href="contact.html"
+                <a class="text-dark" href="contact.php"
                   ><i class="fa fa-angle-right mr-2"></i>Contact Us</a
                 >
               </div>

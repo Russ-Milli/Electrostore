@@ -100,22 +100,27 @@ if (isset($_GET['login_required'])) {
         </div>
     <?php endif; ?>
 
-    <!-- Topbar Start -->
-    <div class="container-fluid">
-        <div class="row align-items-center py-3 px-xl-5">
-            <div class="col-lg-3 d-none d-lg-block">
-                <a href="" class="text-decoration-none">
-                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>lectrostore</h1>
-                </a>
-            </div>
-                <a href="cartpg.php" class="btn border">
-                    <i class="fas fa-shopping-cart text-primary"></i>
-                    <span class="badge"></span>
-                </a>
-            </div>
-        </div>
+<!-- Topbar Start -->
+  <div class="container-fluid">
+    <div class="row align-items-center py-3 px-xl-5">
+      <div class="col-lg-3 d-none d-lg-block">
+        <a href="index.php" class="text-decoration-none">
+          <h1 class="m-0 display-6 font-weight-semi-bold">
+            <span class="text-primary font-weight-bold border px-3 mr-1">E</span>lectrostore
+          </h1>
+        </a>
+      </div>
+
+      <div class="col-lg-1">
+        <a href="cartpg.php" class="btn border">
+          <i class="fas fa-shopping-cart text-primary"></i>
+          <span class="badge"></span>
+        </a>
+      </div>
     </div>
-    <!-- Topbar End -->
+  </div>
+  <!-- Topbar End -->
+
 
 
     <!-- Navbar Start -->
@@ -133,7 +138,7 @@ if (isset($_GET['login_required'])) {
                         <div class="navbar-nav mr-auto py-0">
                             <a href="index.php" class="nav-item nav-link active">Home</a>
                             <a href="cartpg.php" class="nav-item nav-link">Shopping Cart</a>
-                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                            <a href="contact.php" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
                             <?php if ($isLoggedIn): ?>
@@ -278,7 +283,7 @@ if (isset($_GET['login_required'])) {
                         <div class="d-flex flex-column justify-content-start">
                             <a class="text-dark mb-2" href="index.php"><i class="fa fa-angle-right mr-2"></i>Home</a>
                             <a class="text-dark mb-2" href="cartpg.php"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                            <a class="text-dark" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                            <a class="text-dark" href="contact.php"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                         </div>
                     </div>
                     <div class="col-md-4 mb-5">

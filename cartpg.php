@@ -6,6 +6,8 @@ if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
 }
 
+$isLoggedIn = isset($_SESSION['user_id']);
+
 // Handle POST actions: update quantity or remove item
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['change'], $_POST['index'])) {
@@ -78,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div class="col-lg-1">
         <a href="cartpg.php" class="btn border">
           <i class="fas fa-shopping-cart text-primary"></i>
-          <span class="badge"><?= count($_SESSION['cart']) ?></span>
+          <span class="badge"></span>
         </a>
       </div>
     </div>
@@ -86,34 +88,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <!-- Topbar End -->
 
   <!-- Navbar Start -->
-  <div class="container-fluid mb-3">
-    <div class="row align-items-center justify-content-center">
-      <div class="col-lg-11">
-        <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
-          <button
-            type="button"
-            class="navbar-toggler"
-            data-toggle="collapse"
-            data-target="#navbarCollapse"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-            <div class="navbar-nav mr-auto py-0">
-              <a href="index.php" class="nav-item nav-link">Home</a>
-              <a href="cartpg.php" class="nav-item nav-link active">Shopping Cart</a>
-              <a href="contact.html" class="nav-item nav-link">Contact</a>
-            </div>
-            <div class="navbar-nav ml-auto py-0">
-              <a href="auth/login.php" class="nav-item nav-link">Login</a>
-              <a href="auth/signup.php" class="nav-item nav-link">Register</a>
-            </div>
+    <div class="container-fluid mb-2">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-lg-11">
+            <nav class="navbar navbar-expand-lg bg-light navbar-light py-3 py-lg-0 px-0">
+              <a href="" class="text-decoration-none d-block d-lg-none">
+                  <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>lectrostore</h1>
+              </a>
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                  <div class="navbar-nav mr-auto py-0">
+                      <a href="index.php" class="nav-item nav-link">Home</a>
+                      <a href="cartpg.php" class="nav-item nav-link active">Shopping Cart</a>
+                      <a href="contact.php" class="nav-item nav-link">Contact</a>
+                  </div>
+                  <div class="navbar-nav ml-auto py-0">
+                      <?php if ($isLoggedIn): ?>
+                          <a href="logout.php" class="nav-item nav-link">Logout</a>
+                      <?php else: ?>
+                          <a href="auth/login.php" class="nav-item nav-link">Login</a>
+                          <a href="auth/signup.php" class="nav-item nav-link">Register</a>
+                      <?php endif; ?>
+                  </div>
+              </div>
+            </nav>
           </div>
-        </nav>
-      </div>
+        </div>
     </div>
-  </div>
-  <!-- Navbar End -->
+    <!-- Navbar End -->
 
   <!-- ElectroStore Banner -->
   <nav class="navbar navbar-expand-lg" style="background-color: #0096d6">
@@ -217,7 +221,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <div class="d-flex flex-column justify-content-start">
                             <a class="text-dark mb-2" href="index.php"><i class="fa fa-angle-right mr-2"></i>Home</a>
                             <a class="text-dark mb-2" href="cartpg.php"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                            <a class="text-dark" href="contact.html"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                            <a class="text-dark" href="contact.php"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                         </div>
                     </div>
                     <div class="col-md-4 mb-5">
