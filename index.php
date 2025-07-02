@@ -293,6 +293,7 @@ if (isset($_GET['login_required'])) {
                             </div>
                             <div>
                                 <button class="btn btn-primary btn-block border-0 py-3" type="submit">Subscribe Now</button>
+                                
                             </div>
                         </form>
                     </div>
@@ -300,6 +301,9 @@ if (isset($_GET['login_required'])) {
             </div>
         </div>
     </div>
+                                    
+<footer class="bg-dark text-white text-center py-3">&copy; 2025 ElectroStore. All rights reserved.
+</footer>
     <!-- Footer End -->
 
 
