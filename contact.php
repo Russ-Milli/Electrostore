@@ -1,5 +1,5 @@
 <?php
-include_once 'auth_check.php';  // Make sure user is logged in
+session_start();
 
 // Initialize cart if not set
 if (!isset($_SESSION['cart'])) {
@@ -85,7 +85,8 @@ $isLoggedIn = isset($_SESSION['user_id']);
                   </div>
                   <div class="navbar-nav ml-auto py-0">
                       <?php if ($isLoggedIn): ?>
-                          <a href="logout.php" class="nav-item nav-link">Logout</a>
+                          <a href="profile.php" class="nav-item nav-link">Profile</a>
+                          <a href="auth/logout.php" class="nav-item nav-link">Logout</a>
                       <?php else: ?>
                           <a href="auth/login.php" class="nav-item nav-link">Login</a>
                           <a href="auth/signup.php" class="nav-item nav-link">Register</a>
@@ -292,11 +293,6 @@ $isLoggedIn = isset($_SESSION['user_id']);
 <footer class="bg-dark text-white text-center py-3">&copy; 2025 ElectroStore. All rights reserved.
 </footer>
     <!-- Footer End -->
-
-    <!-- Back to Top -->
-    <a href="#" class="btn btn-primary back-to-top"
-      ><i class="fa fa-angle-double-up"></i
-    ></a>
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

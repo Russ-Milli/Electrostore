@@ -1,5 +1,5 @@
 <?php
-include_once 'auth_check.php';  // Make sure user is logged in
+include_once 'auth/auth_check.php';  // Make sure user is logged in
 
 // Initialize cart if not set
 if (!isset($_SESSION['cart'])) {
@@ -106,7 +106,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   </div>
                   <div class="navbar-nav ml-auto py-0">
                       <?php if ($isLoggedIn): ?>
-                          <a href="logout.php" class="nav-item nav-link">Logout</a>
+                        <a href="profile.php" class="nav-item nav-link">Profile</a>
+                        <a href="auth/logout.php" class="nav-item nav-link">Logout</a>
                       <?php else: ?>
                           <a href="auth/login.php" class="nav-item nav-link">Login</a>
                           <a href="auth/signup.php" class="nav-item nav-link">Register</a>
@@ -196,7 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </table>
           <?php if (!empty($_SESSION['cart'])): ?>
             <div class="d-flex justify-content-end mt-3">
-              <a href="checkout/checkout.php" class="btn btn-success btn-block border-0 py-3">Proceed to Checkout</a>
+              <a href="checkout.php" class="btn btn-success btn-block border-0 py-3">Proceed to Checkout</a>
             </div>
           <?php endif; ?>
     </div>

@@ -15,6 +15,13 @@ $stmt = $conn->prepare($query);
 $stmt->execute();
 $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Goodbye 🥲
+if (isset($_GET['goodbye'])) {
+    $message = "Your account has been successfully deleted. Goodbye!🥲";
+    $alertType = 'info';
+}
+
+
 // Handle add to cart
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'], $_POST['product_id'])) {
     if (!isset($_SESSION['user_id'])) {
@@ -95,10 +102,24 @@ if (isset($_GET['login_required'])) {
 <body>
 
     <?php if ($message): ?>
-        <div class="alert alert-<?= isset($_GET['login_required']) ? 'warning' : 'success' ?> text-center">
+        <div class="alert alert-<?= $alertType ?? (isset($_GET['login_required']) ? 'warning' : 'success') ?> alert-dismissible fade show text-center mx-5 mt-3" role="alert">
             <?= htmlspecialchars($message) ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     <?php endif; ?>
+
+    <?php if (isset($_GET['goodbye'])): ?>
+        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            Your account has been deleted. Goodbye!👋
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    <?php endif; ?>
+
+
 
 <!-- Topbar Start -->
   <div class="container-fluid">
@@ -142,7 +163,8 @@ if (isset($_GET['login_required'])) {
                         </div>
                         <div class="navbar-nav ml-auto py-0">
                             <?php if ($isLoggedIn): ?>
-                                <a href="logout.php" class="nav-item nav-link">Logout</a>
+                                <a href="profile.php" class="nav-item nav-link">Profile</a>
+                                <a href="auth/logout.php" class="nav-item nav-link">Logout</a>
                             <?php else: ?>
                                 <a href="auth/login.php" class="nav-item nav-link">Login</a>
                                 <a href="auth/signup.php" class="nav-item nav-link">Register</a>

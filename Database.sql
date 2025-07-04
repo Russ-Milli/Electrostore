@@ -1,18 +1,17 @@
--- Create database if not exists and use it
-CREATE DATABASE IF NOT EXISTS electrostore;
-USE electrostore;
-
--- Drop tables if they exist (in order to avoid foreign key constraint issues)
+-- Drop tables if exist (in dependency order)
 DROP TABLE IF EXISTS purchases;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS users;
 
--- Users table 
+-- Users table
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password_hash VARCHAR(255) NOT NULL,
+    full_name VARCHAR(100),
+    phone_number VARCHAR(20),
+    address TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -27,7 +26,7 @@ CREATE TABLE products (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Purchases table
+-- Purchases table with payment_method & shipping_address
 CREATE TABLE purchases (
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
@@ -35,11 +34,13 @@ CREATE TABLE purchases (
     quantity INT NOT NULL,
     total_price DECIMAL(10,2) NOT NULL,
     purchase_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    payment_method VARCHAR(50) NOT NULL,
+    shipping_address TEXT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- Insert sample products
+-- Sample products
 INSERT INTO products (name, description, price, image_path) VALUES
 ('HP Pavilion 13.3', 'A sleek and lightweight laptop designed for portability and performance. The HP Pavilion 13.3" delivers crisp visuals, fast processing, and long battery life—perfect for students, professionals, and on-the-go users.', 699, 'img/laptop1.jpg'),
 ('HP 15 Notebook', 'Combining everyday reliability with solid performance, the HP 15 Notebook is ideal for work, school, or home use. Enjoy a spacious display, responsive computing, and dependable battery life in one affordable package.', 799, 'img/laptop2.jpg'),

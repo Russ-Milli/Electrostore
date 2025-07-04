@@ -2,7 +2,6 @@
 session_start();
 
 if (isset($_SESSION['user_id'])) {
-    // User is already logged in, redirect to home
     header("Location: /Electrostore/index.php");
     exit();
 }
@@ -13,33 +12,34 @@ $db = new Database();
 $pdo = $db->connect();
 
 $error = '';
-$success = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = trim($_POST['username']);
     $email = trim($_POST['email']);
+    $full_name = trim($_POST['full_name']);
+    $phone_number = trim($_POST['phone_number']);
+    $address = trim($_POST['address']);
     $password = $_POST['password'];
-    $password_confirm = $_POST['confirm'];  // note the change here to match your new form
+    $password_confirm = $_POST['confirm'];
 
     // Validate inputs
-    if (empty($username) || empty($email) || empty($password)) {
-        $error = "All fields are required.";
+    if (empty($username) || empty($email) || empty($password) || empty($full_name)) {
+        $error = "All required fields must be filled.";
     } elseif ($password !== $password_confirm) {
-        $error = "Passwords don't match.";
+        $error = "Passwords do not match.";
     } elseif (strlen($password) < 8) {
-        $error = "Password must be at least 8 characters.";
+        $error = "Password must be at least 8 characters long.";
     } else {
-        // Check if user exists
+        // Check if username or email already exists
         $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ? OR email = ?");
         $stmt->execute([$username, $email]);
         if ($stmt->fetch()) {
             $error = "Username or email already exists.";
         } else {
-            // Create user
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $pdo->prepare("INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)");
-            if ($stmt->execute([$username, $email, $password_hash])) {
-                // You can redirect after successful signup or show a message
+            $stmt = $pdo->prepare("INSERT INTO users (username, email, password_hash, full_name, phone_number, address) VALUES (?, ?, ?, ?, ?, ?)");
+            $success = $stmt->execute([$username, $email, $password_hash, $full_name, $phone_number, $address]);
+            if ($success) {
                 header("Location: login.php?signup=success");
                 exit;
             } else {
@@ -77,22 +77,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php endif; ?>
 
         <form onsubmit="return validateSignup()" method="POST" action="">
-            <label for="username" class="visually-hidden">Username</label>
-            <input type="text" id="username" name="username" placeholder="Username" required
+            <input type="text" id="full_name" name="full_name" placeholder="Full Name *" required
+                value="<?php echo isset($full_name) ? htmlspecialchars($full_name) : ''; ?>" />
+
+            <input type="text" id="username" name="username" placeholder="Username *" required
                 value="<?php echo isset($username) ? htmlspecialchars($username) : ''; ?>" />
 
-            <label for="email" class="visually-hidden">Email</label>
-            <input type="email" id="email" name="email" placeholder="Email" required
+            <input type="email" id="email" name="email" placeholder="Email *" required
                 value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>" />
 
-            <label for="password" class="visually-hidden">Password</label>
-            <input type="password" id="password" name="password" placeholder="Password" required />
+            <input type="text" id="phone_number" name="phone_number" placeholder="Phone Number"
+                value="<?php echo isset($phone_number) ? htmlspecialchars($phone_number) : ''; ?>" />
+<input type="text" id="address" name="address" placeholder="Shipping Address"
+    value="<?php echo isset($address) ? htmlspecialchars($address) : ''; ?>" />
 
-            <label for="confirm" class="visually-hidden">Confirm Password</label>
-            <input type="password" id="confirm" name="confirm" placeholder="Confirm Password" required />
+            <input type="password" id="password" name="password" placeholder="Password *" required />
+
+            <input type="password" id="confirm" name="confirm" placeholder="Confirm Password *" required />
 
             <button type="submit">Sign Up</button>
         </form>
+
         <p>Already have an account? <a href="login.php">Login here</a></p>
     </div>
 
