@@ -64,14 +64,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../assets/css/style.css" />
 </head>
 <body>
-    <!-- Navigation Buttons -->
-    <a href="login.php" class="top-left-back">← Back</a>
-    <a href="../index.php" class="top-right-link">🏠 Home</a>
 
     <!-- Signup Form Container -->
     <div class="login-container">
-        <h2>Create Your Account</h2>
-
+        <div class="form-heading">
+            Create account for <a href="../index.php" style="text-decoration: none; color: #333;"><strong style="color: #007bff;">ElectroStore</strong></a>
+        </div>
         <?php if ($error): ?>
             <p style="color: red; font-weight: bold;"><?php echo htmlspecialchars($error); ?></p>
         <?php endif; ?>
@@ -88,8 +86,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <input type="text" id="phone_number" name="phone_number" placeholder="Phone Number"
                 value="<?php echo isset($phone_number) ? htmlspecialchars($phone_number) : ''; ?>" />
-<input type="text" id="address" name="address" placeholder="Shipping Address"
-    value="<?php echo isset($address) ? htmlspecialchars($address) : ''; ?>" />
+
+            <input type="text" id="address" name="address" placeholder="Shipping Address"
+                value="<?php echo isset($address) ? htmlspecialchars($address) : ''; ?>" />
 
             <input type="password" id="password" name="password" placeholder="Password *" required />
 
