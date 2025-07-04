@@ -77,7 +77,7 @@ if (isset($_GET['login_required'])) {
 
 <head>
     <meta charset="utf-8">
-    <title>ElectroStore</title>
+    <title>ElectroStore - Home</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">

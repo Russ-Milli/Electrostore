@@ -2,7 +2,6 @@
 session_start();
 
 if (isset($_SESSION['user_id'])) {
-    // User is already logged in, redirect to home
     header("Location: /Electrostore/index.php");
     exit();
 }
@@ -60,15 +59,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 
-    <!-- Top-right Home button -->
-    <a href="../index.php" class="top-right-link">🏠 Home</a>
-
     <!-- Centered login form -->
     <div class="login-container">
-        <!-- Heading aligned to right but close to form -->
-        <div class="form-heading">Login to ElectroStore</div>
+        <!-- Updated form heading with link -->
+        <div class="form-heading">
+            <a href="/Electrostore/index.php" style="text-decoration: none; color: #333;">Login to <strong style="color: #007bff;">ElectroStore</strong></a>
+        </div>
 
-        <!-- Display login error if any -->
         <?php if (!empty($error)): ?>
             <div class="error-message" style="color: red; margin-bottom: 1rem;">
                 <?= htmlspecialchars($error) ?>
@@ -88,7 +85,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p>Don't have an account? <a href="signup.php">Sign up here</a></p>
     </div>
 
-    <!-- JS for validation -->
     <script src="../assets/js/validation.js"></script>
 </body>
 </html>

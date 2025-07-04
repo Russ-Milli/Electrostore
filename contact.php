@@ -99,122 +99,71 @@ $isLoggedIn = isset($_SESSION['user_id']);
     </div>
     <!-- Navbar End -->
 
+  <!-- ElectroStore Banner -->
+  <nav class="navbar navbar-expand-lg" style="background-color: #0096d6">
+    <div class="container">
+      <small class="text-white-50 ms-2 me-auto">Your Trusted HP Partner</small>
+    </div>
+  </nav>
+
     <!-- Page Header Start -->
-    <div class="container-fluid bg-secondary mb-4">
+    <div class="container-fluid">
       <div
         class="d-flex flex-column align-items-center justify-content-center"
-        style="min-height: 200px"
+        style="min-height: 150px"
       >
-        <h1 class="font-weight-semi-bold text-uppercase mb-3">Contact Us</h1>
+        <h1 class="font-weight-semi-bold text-uppercase">Contact Us</h1>
       </div>
     </div>
     <!-- Page Header End -->
 
-    <!-- Contact Start -->
-    <div class="container-fluid pt-5">
-      <div class="text-center mb-4">
-        <h2 class="section-title px-5">
-          <span class="px-2">Contact For Any Queries</span>
-        </h2>
+<!-- Contact Start -->
+<div class="container-fluid pt-5">
+  <div class="row px-xl-5">
+    <!-- Contact Form -->
+    <div class="col-lg-7 mb-5">
+      <h5 class="font-weight-semi-bold mb-3">Send Us a Message</h5>
+      <p>We’d love to hear from you. Reach out with any questions or comments!</p>
+      <form id="contactForm" novalidate>
+        <div class="mb-3">
+          <input type="text" class="form-control" id="name" placeholder="Your Name" required />
+        </div>
+        <div class="mb-3">
+          <input type="email" class="form-control" id="email" placeholder="Your Email" required />
+        </div>
+        <div class="mb-3">
+          <input type="text" class="form-control" id="subject" placeholder="Subject" required />
+        </div>
+        <div class="mb-3">
+          <textarea class="form-control" rows="5" id="message" placeholder="Message" required></textarea>
+        </div>
+        <button class="btn btn-primary py-2 px-4" type="submit">Send Message</button>
+      </form>
+    </div>
+
+    <!-- Contact Info -->
+    <div class="col-lg-5 mb-5">
+      <h5 class="font-weight-semi-bold mb-3">Get In Touch</h5>
+      <p>We're available Monday–Saturday, 8am to 6pm, and always ready to help you.</p>
+
+      <div class="mb-4">
+        <h6 class="text-dark">ElectroStore Nairobi</h6>
+        <p><i class="fa fa-map-marker-alt text-primary mr-2"></i>Ground Floor, Kenyatta Avenue, Nairobi</p>
+        <p><i class="fa fa-envelope text-primary mr-2"></i>support@electrostore.co.ke</p>
+        <p><i class="fa fa-phone-alt text-primary mr-2"></i>+254 700 123 456</p>
       </div>
-      <div class="row px-xl-5">
-        <div class="col-lg-7 mb-5">
-          <div class="contact-form">
-            <div id="success"></div>
-            <form name="sentMessage" id="contactForm" novalidate="novalidate">
-              <div class="control-group">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="name"
-                  placeholder="Your Name"
-                  required="required"
-                  data-validation-required-message="Please enter your name"
-                />
-                <p class="help-block text-danger"></p>
-              </div>
-              <div class="control-group">
-                <input
-                  type="email"
-                  class="form-control"
-                  id="email"
-                  placeholder="Your Email"
-                  required="required"
-                  data-validation-required-message="Please enter your email"
-                />
-                <p class="help-block text-danger"></p>
-              </div>
-              <div class="control-group">
-                <input
-                  type="text"
-                  class="form-control"
-                  id="subject"
-                  placeholder="Subject"
-                  required="required"
-                  data-validation-required-message="Please enter a subject"
-                />
-                <p class="help-block text-danger"></p>
-              </div>
-              <div class="control-group">
-                <textarea
-                  class="form-control"
-                  rows="6"
-                  id="message"
-                  placeholder="Message"
-                  required="required"
-                  data-validation-required-message="Please enter your message"
-                ></textarea>
-                <p class="help-block text-danger"></p>
-              </div>
-              <div>
-                <button
-                  class="btn btn-primary py-2 px-4"
-                  type="submit"
-                  id="sendMessageButton"
-                >
-                  Send Message
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="col-lg-5 mb-5">
-          <h5 class="font-weight-semi-bold mb-3">Get In Touch</h5>
-          <p>
-            Justo sed diam ut sed amet duo amet lorem amet stet sea ipsum, sed
-            duo amet et. Est elitr dolor elitr erat sit sit. Dolor diam et erat
-            clita ipsum justo sed.
-          </p>
-          <div class="d-flex flex-column mb-3">
-            <h5 class="font-weight-semi-bold mb-3">Store 1</h5>
-            <p class="mb-2">
-              <i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street,
-              New York, USA
-            </p>
-            <p class="mb-2">
-              <i class="fa fa-envelope text-primary mr-3"></i>info@example.com
-            </p>
-            <p class="mb-2">
-              <i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890
-            </p>
-          </div>
-          <div class="d-flex flex-column">
-            <h5 class="font-weight-semi-bold mb-3">Store 2</h5>
-            <p class="mb-2">
-              <i class="fa fa-map-marker-alt text-primary mr-3"></i>123 Street,
-              New York, USA
-            </p>
-            <p class="mb-2">
-              <i class="fa fa-envelope text-primary mr-3"></i>info@example.com
-            </p>
-            <p class="mb-0">
-              <i class="fa fa-phone-alt text-primary mr-3"></i>+012 345 67890
-            </p>
-          </div>
-        </div>
+
+      <div>
+        <h6 class="text-dark">ElectroStore Mombasa</h6>
+        <p><i class="fa fa-map-marker-alt text-primary mr-2"></i>Moi Avenue, Mombasa</p>
+        <p><i class="fa fa-envelope text-primary mr-2"></i>coast@electrostore.co.ke</p>
+        <p><i class="fa fa-phone-alt text-primary mr-2"></i>+254 711 987 654</p>
       </div>
     </div>
-    <!-- Contact End -->
+  </div>
+</div>
+<!-- Contact End -->
+
 
     <!-- Footer Start -->
     <div class="container-fluid bg-secondary text-dark mt-5 pt-5">
