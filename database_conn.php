@@ -4,10 +4,15 @@ class Database {
     private $db_name = 'electrostore';
     private $username = 'root';
     private $password = '';
+
+    
     private $conn;
+
+    
 
     public function connect() {
         $this->conn = null;
+
 
         try {
             $this->conn = new PDO(
@@ -23,5 +28,23 @@ class Database {
 
         return $this->conn;
     }
+
+    
 }
+$smtp_host = 'smtp.gmail.com';
+$smtp_port = 587;
+$smtp_username = 'ryanthuku64@gmail.com';
+$smtp_password = 'oxyw ugwr xabn skln';
+$from_email = 'ryanthuku64@gmail.com';
+$from_name = 'ElectroStore';
+
+
+ 
+
+
+
+
+
+
+
 ?>
