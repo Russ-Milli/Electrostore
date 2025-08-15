@@ -20,7 +20,7 @@ $success = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $identifier = trim($_POST['identifier']);
-    $password = trim($_POST['password']);
+    $password = textdomain($_POST['password']);
 
     if (empty($identifier) || empty($password)) {
         $error = "Please fill in all fields.";
