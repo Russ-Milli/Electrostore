@@ -5,10 +5,6 @@
   
   "env": {
     "PHP_VERSION": "8.1"
-  },
-
-  "builds": [
-    { "src": "api/*.php", "use": "@vercel/php" }
-  ]
+  }
 }
 
