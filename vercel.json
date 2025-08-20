@@ -7,10 +7,8 @@
     "PHP_VERSION": "8.1"
   },
 
-  "functions": {
-    "api/*.php": {
-      "runtime": "vercel-php@0.6.0"
-    }
-  }
+  "builds": [
+    { "src": "api/*.php", "use": "@vercel/php" }
+  ]
 }
 
