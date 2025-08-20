@@ -139,8 +139,7 @@ function sendVerificationEmail($email, $token, $username) {
                     <p>Thank you for registering with ElectroStore! We're excited to have you join our community.</p>
                     <p>To complete your registration and start shopping, please verify your email address by clicking the button below:</p>
                     <p style='text-align: center;'><a href='" . $verificationLink . "' class='button'>Verify Email Address</a></p>
-                    <p>Or copy and paste this link into your browser:</p>
-                    <p style='word-break: break-all; color: #007bff; font-size: 12px;'>" . $verificationLink . "</p>
+                    
                     <p><strong>Why verify your email?</strong></p>
                     <ul>
                         <li>Secure your account</li>

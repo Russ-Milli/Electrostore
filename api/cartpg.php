@@ -1,4 +1,5 @@
 <?php
+session_start();
 include __DIR__ . '/database_conn.php';   
 include __DIR__ . '/auth/auth_check.php';
 

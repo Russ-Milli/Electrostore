@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'], $_POST
     $productId = (int)$_POST['product_id'];
     
     try {
-        $stmt = $conn->prepare("SELECT * FROM products WHERE id = ? AND status = 'active'");
+        $stmt = $conn->prepare("SELECT * FROM products WHERE id = ?");
         $stmt->execute([$productId]);
         $product = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -390,7 +390,7 @@ if (isset($_SESSION['cart'])) {
                                     name="add_to_cart"
                                     class="btn btn-sm text-dark p-0"
                                     style="background: none; border: none; cursor: pointer;"
-                                >
+                                                              >
                                     <i class="fas fa-shopping-cart text-primary mr-1"></i>
                                     Add To Cart
                                 </button>

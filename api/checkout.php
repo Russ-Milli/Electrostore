@@ -1,4 +1,5 @@
 <?php
+session_start();
   // Ensures user is logged in
 include __DIR__ . '/database_conn.php';
 include __DIR__ . '/auth/auth_check.php';
