@@ -1,0 +1,67 @@
+{
+  "version": 2,
+  "functions": {
+    "api/**/*.php": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "routes": [
+    {
+      "src": "/css/(.*)",
+      "dest": "/public/css/$1"
+    },
+    {
+      "src": "/js/(.*)",
+      "dest": "/public/js/$1"
+    },
+    {
+      "src": "/img/(.*)",
+      "dest": "/public/img/$1"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/public/assets/$1"
+    },
+    {
+      "src": "/",
+      "dest": "/api/index.php"
+    },
+    {
+      "src": "/login",
+      "dest": "/api/auth/login.php"
+    },
+    {
+      "src": "/signup",
+      "dest": "/api/auth/signup.php"
+    },
+    {
+      "src": "/logout",
+      "dest": "/api/auth/logout.php"
+    },
+    {
+      "src": "/verify",
+      "dest": "/api/auth/verify.php"
+    },
+    {
+      "src": "/cart",
+      "dest": "/api/cart.php"
+    },
+    {
+      "src": "/checkout",
+      "dest": "/api/checkout.php"
+    },
+    {
+      "src": "/contact",
+      "dest": "/api/contact.php"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/api/$1.php"
+    }
+  ],
+  "env": {
+    "PHP_VERSION": "8.1"
+  }
+
+  
+}
