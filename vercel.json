@@ -1,6 +1,6 @@
 {
-  "rewrites": [
-      { "source": "/(.*)", "destination": "/" }
+  "routes": [
+      { "src": "/(.*)", "dest": "/api/index.php" }
     ], 
   
   "env": {
