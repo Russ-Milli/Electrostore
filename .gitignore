@@ -1,6 +1,8 @@
-node_modules
-package-lock.json
-package.json
+node_modules 
+.DS_Store
+dist    
+.env
+coverage    
 vendor
 Database.sql
 .env
