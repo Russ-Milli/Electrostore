@@ -1,9 +1,38 @@
-node_modules 
+# Environment files
+.env
+.env.local
+.env.development
+.env.production
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
 .DS_Store
-dist    
-.env
-coverage    
-vendor
-Database.sql
-.env
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependencies
+node_modules/
+vendor/
+
+# Build outputs
+dist/
+build/
+
+# Local database files
+*.sql
+*.db
+*.sqlite
+
+# Git submodules (if causing issues)
+.gitmodules
 
