@@ -5,74 +5,74 @@
       "runtime": "@vercel/php@0.7.0"
     }
   },
-  "routes": [
+  "rewrites": [
     {
-      "src": "/api/auth/(.*)",
-      "dest": "/api/auth/$1"
+      "source": "/api/auth/(.*)",
+      "destination": "/api/auth/$1"
     },
     {
-      "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
     },
     {
-      "src": "/assets/css/(.*)",
-      "dest": "/public/assets/css/$1"
+      "source": "/assets/css/(.*)",
+      "destination": "/public/assets/css/$1"
     },
     {
-      "src": "/assets/js/(.*)",
-      "dest": "/public/assets/js/$1"
+      "source": "/assets/js/(.*)",
+      "destination": "/public/assets/js/$1"
     },
     {
-      "src": "/assets/img/(.*)",
-      "dest": "/public/assets/img/$1"
+      "source": "/assets/img/(.*)",
+      "destination": "/public/assets/img/$1"
     },
     {
-      "src": "/assets/lib/owlcarousel/(.*)",
-      "dest": "/public/assets/lib/owlcarousel/$1"
+      "source": "/assets/lib/owlcarousel/(.*)",
+      "destination": "/public/assets/lib/owlcarousel/$1"
     },
     {
-      "src": "/assets/lib/(.*)",
-      "dest": "/public/assets/lib/$1"
+      "source": "/assets/lib/(.*)",
+      "destination": "/public/assets/lib/$1"
     },
     {
-      "src": "/assets/scss/(.*)",
-      "dest": "/public/assets/scss/$1"
+      "source": "/assets/scss/(.*)",
+      "destination": "/public/assets/scss/$1"
     },
     {
-      "src": "/assets/(.*)",
-      "dest": "/public/assets/$1"
+      "source": "/assets/(.*)",
+      "destination": "/public/assets/$1"
     },
     {
-      "src": "/css/(.*)",
-      "dest": "/public/css/$1"
+      "source": "/css/(.*)",
+      "destination": "/public/css/$1"
     },
     {
-      "src": "/js/(.*)",
-      "dest": "/public/js/$1"
+      "source": "/js/(.*)",
+      "destination": "/public/js/$1"
     },
     {
-      "src": "/img/(.*)",
-      "dest": "/public/img/$1"
+      "source": "/img/(.*)",
+      "destination": "/public/img/$1"
     },
     {
-      "src": "/vendor/(.*)",
-      "dest": "/public/vendor/$1"
+      "source": "/vendor/(.*)",
+      "destination": "/public/vendor/$1"
     },
     {
-      "src": "/favicon.ico",
-      "dest": "/public/favicon.ico"
+      "source": "/favicon.ico",
+      "destination": "/public/favicon.ico"
     },
     {
-      "src": "/(.*\\.(html|htm))",
-      "dest": "/public/$1"
+      "source": "/(.*\\.(html|htm))",
+      "destination": "/public/$1"
     },
     {
-      "src": "/",
-      "dest": "/public/index.html"
+      "source": "/",
+      "destination": "/public/index.html"
     },
     {
-      "src": "/(.*)",
-      "dest": "/public/$1"
+      "source": "/(.*)",
+      "destination": "/public/$1"
     }
   ],
   "headers": [
