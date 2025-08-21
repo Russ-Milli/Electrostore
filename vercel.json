@@ -1,4 +1,12 @@
 {
+  "functions": {
+    "api/*.php": {
+      "runtime": "vercel-php@0.6.0"
+    },
+    "public/*.php": {
+      "runtime": "vercel-php@0.6.0"
+    }
+  },
   "rewrites": [
     {
       "source": "/api/auth/(.*)",
@@ -54,7 +62,7 @@
     },
     {
       "source": "/",
-      "destination": "/api/index.php"
+      "destination": "/public/index.html"
     },
     {
       "source": "/(.*)",
