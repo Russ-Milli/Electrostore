@@ -63,10 +63,6 @@
       "destination": "/public/favicon.ico"
     },
     {
-      "source": "/(.*\\.(html|htm))",
-      "destination": "/public/$1"
-    },
-    {
       "source": "/",
       "destination": "/public/index.html"
     },
