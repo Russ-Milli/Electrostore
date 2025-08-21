@@ -23,7 +23,7 @@ if (file_exists(__DIR__ . '/../vendor/autoload.php')) {
 
 // Email configuration (move to environment variables in production)
 $smtp_host = 'smtp.gmail.com';
-$smtp_port = 587;
+$smtp_port = 465;
 $smtp_username = 'ryanthuku64@gmail.com';
 $smtp_password = 'oxyw ugwr xabn skln'; // Consider using app-specific password
 $from_email = 'ryanthuku64@gmail.com';

@@ -1,17 +1,38 @@
 {
   "version": 2,
   "functions": {
-    "*.php": {
-      "runtime": "vercel-php@0.6.0"
+    "api/**/*.php": {
+      "runtime": "@vercel/php@0.6.0"
     }
   },
   "routes": [
-    { "src": "^/public/(.*)$", "dest": "/$1" },
-    { "handle": "filesystem" },
-    { "src": "^/(.*\\.php)$", "dest": "/$1" },
-    { "src": "/.*", "dest": "/index.php" }
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/public/assets/$1"
+    },
+    {
+      "src": "/css/(.*)",
+      "dest": "/public/css/$1"
+    },
+    {
+      "src": "/js/(.*)",
+      "dest": "/public/js/$1"
+    },
+    {
+      "src": "/img/(.*)",
+      "dest": "/public/img/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/$1"
+    }
   ],
-  "buildCommand": "composer install --no-dev --optimize-autoloader"
-
-  
+  "env": {
+    "PHP_VERSION": "8.2"
+  },
+  "outputDirectory": "public"
 }

@@ -1,63 +1,85 @@
 <?php
-// api/database_conn.php - Local + Vercel friendly
+// api/database_conn.php - Vercel & Local compatible
 
-// Always fallback properly
-$servername = !empty($_ENV['DB_HOST']) ? $_ENV['DB_HOST'] : 'localhost';
-$username   = !empty($_ENV['DB_USER']) ? $_ENV['DB_USER'] : 'root';
-$password   = !empty($_ENV['DB_PASS']) ? $_ENV['DB_PASS'] : '';
-$dbname     = !empty($_ENV['DB_NAME']) ? $_ENV['DB_NAME'] : 'electrostore';
+// Environment-aware database configuration
+function getDatabaseConfig() {
+    return [
+        'host'     => getenv('DB_HOST') ?: ($_ENV['DB_HOST'] ?? 'localhost'),
+        'username' => getenv('DB_USER') ?: ($_ENV['DB_USER'] ?? 'root'),
+        'password' => getenv('DB_PASS') ?: ($_ENV['DB_PASS'] ?? ''),
+        'database' => getenv('DB_NAME') ?: ($_ENV['DB_NAME'] ?? 'electrostore'),
+        'port'     => getenv('DB_PORT') ?: ($_ENV['DB_PORT'] ?? '3306'),
+    ];
+}
 
-// Database connection with error handling
+// Get database configuration
+$dbConfig = getDatabaseConfig();
+$servername = $dbConfig['host'];
+$username = $dbConfig['username'];
+$password = $dbConfig['password'];
+$dbname = $dbConfig['database'];
+
+// Primary MySQLi connection (for backward compatibility)
 try {
     $conn = new mysqli($servername, $username, $password, $dbname);
-
+    
     if ($conn->connect_error) {
         throw new Exception("Database connection failed: " . $conn->connect_error);
     }
-
+    
     $conn->set_charset("utf8mb4");
-
+    
 } catch (Exception $e) {
-    if (isset($_ENV['VERCEL']) || isset($_ENV['VERCEL_URL'])) {
+    error_log("Database connection error: " . $e->getMessage());
+    
+    if (isProduction()) {
         die("Service temporarily unavailable. Please try again later.");
     } else {
         die("Database connection error: " . $e->getMessage());
     }
 }
 
-// Optional: PDO connection (recommended)
-
+// PDO connection function (recommended for new code)
 function getPDOConnection() {
-    $host = 'localhost';
-    $dbname = 'electrostore';
-    $username = 'root';
-    $password = '';
+    $config = getDatabaseConfig();
     
     try {
-        $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", 
-                       $username, $password, [
+        $dsn = "mysql:host={$config['host']};port={$config['port']};dbname={$config['database']};charset=utf8mb4";
+        
+        $pdo = new PDO($dsn, $config['username'], $config['password'], [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             PDO::ATTR_EMULATE_PREPARES => false,
+            PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false, // For cloud databases
         ]);
+        
         return $pdo;
+        
     } catch (PDOException $e) {
-        error_log("Database connection failed: " . $e->getMessage());
-        die("Database connection failed. Please try again later.");
+        error_log("PDO connection failed: " . $e->getMessage());
+        
+        if (isProduction()) {
+            die("Service temporarily unavailable. Please try again later.");
+        } else {
+            die("Database connection failed: " . $e->getMessage());
+        }
     }
 }
 
-
+// Environment detection
 function isProduction() {
-    return isset($_ENV['VERCEL']) || isset($_ENV['VERCEL_URL']);
+    return !empty(getenv('VERCEL')) || 
+           !empty(getenv('VERCEL_URL')) || 
+           !empty($_ENV['VERCEL']) || 
+           !empty($_ENV['VERCEL_URL']);
 }
 
-// Helper function to get base URL
+// Get base URL for the application
 function getBaseUrl() {
-    if (isset($_ENV['VERCEL_URL'])) {
-        return 'https://' . $_ENV['VERCEL_URL'];
-    } elseif (isset($_ENV['APP_URL'])) {
-        return $_ENV['APP_URL'];
+    if (!empty(getenv('VERCEL_URL'))) {
+        return 'https://' . getenv('VERCEL_URL');
+    } elseif (!empty(getenv('APP_URL'))) {
+        return getenv('APP_URL');
     } else {
         // Local development fallback
         $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
@@ -65,8 +87,10 @@ function getBaseUrl() {
     }
 }
 
-// Helper function to fix image paths
+// Helper function for image paths
 function getImagePath($imagePath) {
+    if (empty($imagePath)) return '/img/placeholder.jpg';
+    
     // If path already starts with /, return as is
     if (strpos($imagePath, '/') === 0) {
         return $imagePath;
@@ -81,8 +105,33 @@ function getImagePath($imagePath) {
     return '/img/' . $imagePath;
 }
 
+// Helper function for API responses
+function sendJsonResponse($data, $statusCode = 200) {
+    http_response_code($statusCode);
+    header('Content-Type: application/json');
+    echo json_encode($data);
+    exit;
+}
 
+// Helper function for error responses
+function sendErrorResponse($message, $statusCode = 500) {
+    sendJsonResponse([
+        'success' => false,
+        'error' => $message
+    ], $statusCode);
+}
 
-
+// Test database connection (optional - remove in production)
+if (isProduction() === false && isset($_GET['test_db'])) {
+    try {
+        $testPdo = getPDOConnection();
+        echo "Database connection successful!<br>";
+        echo "Host: " . $dbConfig['host'] . "<br>";
+        echo "Database: " . $dbConfig['database'] . "<br>";
+        echo "Environment: " . (isProduction() ? 'Production' : 'Development');
+    } catch (Exception $e) {
+        echo "Database test failed: " . $e->getMessage();
+    }
+    exit;
+}
 ?>
-
