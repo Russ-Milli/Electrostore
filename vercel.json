@@ -4,7 +4,11 @@
       "runtime": "vercel-php@0.6.0"
     }
   },
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/" }
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/api/$1"
+    }
   ]
 }
+
