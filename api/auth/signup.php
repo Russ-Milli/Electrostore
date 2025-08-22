@@ -346,7 +346,7 @@ function sendVerificationEmail($email, $token, $username) {
     <div class="login-container">
         <div class="form-heading">
             <!-- FIXED: Link path for api/auth folder structure -->
-            <a href="../../index.php" style="text-decoration: none; color: #333;">Signup to <strong style="color: #007bff;">ElectroStore</strong></a>
+            <a href="public/index.php" style="text-decoration: none; color: #333;">Signup to <strong style="color: #007bff;">ElectroStore</strong></a>
         </div>
 
         <?php if (!empty($error)): ?>

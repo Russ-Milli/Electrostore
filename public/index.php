@@ -13,7 +13,8 @@ header('X-XSS-Protection: 1; mode=block');
 $isLoggedIn = isset($_SESSION['user_id']);
 
 // Clean up includes - remove duplicates
-require_once __DIR__ . '/database_conn.php';
+require_once __DIR__ . '/../api/database_conn.php';
+
 
 try {
     $conn = getPDOConnection();
@@ -41,7 +42,7 @@ if (isset($_GET['goodbye'])) {
 // Handle add to cart
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'], $_POST['product_id'])) {
     if (!$isLoggedIn) {
-        header('Location: index.php?login_required=1');
+        header('Location: /public/index.php?login_required=1');
         exit();
     }
 
@@ -77,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'], $_POST
                 $_SESSION['cart'][] = $item;
             }
 
-            header('Location: index.php?added=1');
+            header('Location: /public/index.php?added=1');
             exit();
         }
     } catch (PDOException $e) {
@@ -236,7 +237,7 @@ if (isset($_SESSION['cart'])) {
                 </a>
             </div>
             <div class="col-lg-3 col-6 text-right">
-                <a href="cartpg.php" class="btn border position-relative">
+                <a href="/api/cartpg.php" class="btn border position-relative">
                     <i class="fas fa-shopping-cart text-primary"></i>
                     <?php if ($cartCount > 0): ?>
                         <span class="cart-badge"><?= $cartCount ?></span>
@@ -262,18 +263,18 @@ if (isset($_SESSION['cart'])) {
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="index.php" class="nav-item nav-link active">Home</a>
-                            <a href="cartpg.php" class="nav-item nav-link">Shopping Cart</a>
-                            <a href="contact.php" class="nav-item nav-link">Contact</a>
+                            <a href="/public/index.php" class="nav-item nav-link active">Home</a>
+                            <a href="/api/cartpg.php" class="nav-item nav-link">Shopping Cart</a>
+                            <a href="/api/contact.php" class="nav-item nav-link">Contact</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0">
                             <?php if ($isLoggedIn): ?>
                                 <span class="nav-item nav-link">Welcome, <?= htmlspecialchars($_SESSION['username'] ?? 'User') ?>!</span>
-                                <a href="profile.php" class="nav-item nav-link">Profile</a>
-                                <a href="auth/logout.php" class="nav-item nav-link">Logout</a>
+                                <a href="/api/profile.php" class="nav-item nav-link">Profile</a>
+                                <a href="/api/auth/logout.php" class="nav-item nav-link">Logout</a>
                             <?php else: ?>
-                                <a href="auth/login.php" class="nav-item nav-link">Login</a>
-                                <a href="auth/signup.php" class="nav-item nav-link">Register</a>
+                                <a href="/api/auth/login.php" class="nav-item nav-link">Login</a>
+                                <a href="/api/auth/signup.php" class="nav-item nav-link">Register</a>
                             <?php endif; ?>
                         </div>
                     </div>
@@ -378,7 +379,7 @@ if (isset($_SESSION['cart'])) {
                             </div>
                         </div>
                         <div class="card-footer d-flex justify-content-between bg-light border">
-                            <a href="productpg.php?id=<?= $product['id'] ?>" class="btn btn-sm text-dark p-0">
+                            <a href="/api/productpg.php?id=<?= $product['id'] ?>" class="btn btn-sm text-dark p-0">
                                 <i class="fas fa-eye text-primary mr-1"></i>
                                 View Detail
                             </a>
@@ -421,9 +422,9 @@ if (isset($_SESSION['cart'])) {
                     <div class="col-md-4 mb-5">
                         <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-dark mb-2" href="index.php"><i class="fa fa-angle-right mr-2"></i>Home</a>
-                            <a class="text-dark mb-2" href="cartpg.php"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
-                            <a class="text-dark" href="contact.php"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
+                            <a class="text-dark mb-2" href="/public/index.php"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a class="text-dark mb-2" href="api/cartpg.php"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
+                            <a class="text-dark" href="api/contact.php"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                         </div>
                     </div>
                     <div class="col-md-4 mb-5">
@@ -432,10 +433,10 @@ if (isset($_SESSION['cart'])) {
                             <?php if ($isLoggedIn): ?>
                                 <a class="text-dark mb-2" href="profile.php"><i class="fa fa-angle-right mr-2"></i>My Account</a>
                                 <a class="text-dark mb-2" href="orders.php"><i class="fa fa-angle-right mr-2"></i>Order History</a>
-                                <a class="text-dark" href="auth/logout.php"><i class="fa fa-angle-right mr-2"></i>Logout</a>
+                                <a class="text-dark" href="/api/auth/logout.php"><i class="fa fa-angle-right mr-2"></i>Logout</a>
                             <?php else: ?>
-                                <a class="text-dark mb-2" href="auth/login.php"><i class="fa fa-angle-right mr-2"></i>Login</a>
-                                <a class="text-dark mb-2" href="auth/signup.php"><i class="fa fa-angle-right mr-2"></i>Register</a>
+                                <a class="text-dark mb-2" href="/api/auth/login.php"><i class="fa fa-angle-right mr-2"></i>Login</a>
+                                <a class="text-dark mb-2" href="/api/auth/signup.php"><i class="fa fa-angle-right mr-2"></i>Register</a>
                             <?php endif; ?>
                         </div>
                     </div>

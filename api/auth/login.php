@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $_SESSION['email'] = $user['email'];
                         
                         // Redirect to dashboard or home page
-                        header("Location: ../index.php");
+                        header("Location: public/index.php");
                         exit();
                     }
                 } else {
@@ -325,7 +325,7 @@ function sendVerificationEmail($email, $token, $username) {
 <body>
     <div class="login-container">
         <div class="form-heading">
-            <a href="../index.php">Login to <strong>ElectroStore</strong></a>
+            <a href="public/index.php">Login to <strong>ElectroStore</strong></a>
         </div>
 
         <?php if (!empty($error)): ?>

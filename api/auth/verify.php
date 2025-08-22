@@ -161,7 +161,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
         <div class="action-buttons">
             <?php if ($success): ?>
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <a href="../index.php" class="btn-primary">Continue to ElectroStore</a>
+                    <a href="/public/index.php" class="btn-primary">Continue to ElectroStore</a>
                     <div class="auto-redirect">
                         <script>
                             let countdown = 5;
@@ -172,7 +172,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                                 
                                 if (countdown <= 0) {
                                     clearInterval(redirectTimer);
-                                    window.location.href = '../index.php';
+                                    window.location.href = '/public/index.php';
                                 }
                             }, 1000);
                             
@@ -182,7 +182,7 @@ if (isset($_GET['token']) && !empty($_GET['token'])) {
                     </div>
                 <?php else: ?>
                     <a href="login.php" class="btn-primary">Login Now</a>
-                    <a href="../index.php" class="btn-secondary">Go to Home</a>
+                    <a href="public/index.php" class="btn-secondary">Go to Home</a>
                 <?php endif; ?>
             <?php else: ?>
                 <a href="login.php" class="btn-primary">Try Login Again</a>

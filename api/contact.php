@@ -51,7 +51,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
     <div class="container-fluid">
       <div class="row align-items-center py-3 px-xl-5">
         <div class="col-lg-3 d-none d-lg-block">
-          <a href="../api/index.php" class="text-decoration-none">
+          <a href="/public/index.php" class="text-decoration-none">
             <h1 class="m-0 display-6 font-weight-semi-bold">
               <span class="text-primary font-weight-bold border px-3 mr-1"
                 >E</span
@@ -83,7 +83,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
               </button>
               <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                   <div class="navbar-nav mr-auto py-0">
-                      <a href="index.php" class="nav-item nav-link">Home</a>
+                      <a href="/public/index.php" class="nav-item nav-link">Home</a>
                       <a href="cartpg.php" class="nav-item nav-link">Shopping Cart</a>
                       <a href="contact.php" class="nav-item nav-link active">Contact</a>
                   </div>
