@@ -1,9 +1,4 @@
 {
-  "functions": {
-    "public/index.php": {
-      "runtime": "vercel-php@0.7.0"
-    }
-  },
   "rewrites": [
     {
       "source": "/api/auth/(.*)",
@@ -59,8 +54,13 @@
     },
     {
       "source": "/",
-      "destination": "/api/index.php"
+      "destination": "/public/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/public/$1"
     }
+  
   ],
   "headers": [
     {
