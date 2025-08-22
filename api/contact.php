@@ -83,7 +83,7 @@ $isLoggedIn = isset($_SESSION['user_id']);
               </button>
               <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                   <div class="navbar-nav mr-auto py-0">
-                      <a href="/index.php" class="nav-item nav-link">Home</a>
+                      <a href="index.php" class="nav-item nav-link">Home</a>
                       <a href="cartpg.php" class="nav-item nav-link">Shopping Cart</a>
                       <a href="contact.php" class="nav-item nav-link active">Contact</a>
                   </div>
