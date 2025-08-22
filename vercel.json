@@ -1,10 +1,7 @@
 {
   "functions": {
     "public/index.php": {
-      "runtime": "vercel-php@0.6.0"
-    },
-    "public/**/*.php": {
-      "runtime": "vercel-php@0.6.0"
+      "runtime": "vercel-php@0.7.0"
     }
   },
   "rewrites": [
@@ -62,11 +59,7 @@
     },
     {
       "source": "/",
-      "destination": "/public/index.php"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/public/$1"
+      "destination": "/api/index.php"
     }
   ],
   "headers": [

@@ -13,7 +13,7 @@ header('X-XSS-Protection: 1; mode=block');
 $isLoggedIn = isset($_SESSION['user_id']);
 
 // Clean up includes - remove duplicates
-require_once __DIR__ . '/../api/database_conn.php';
+require_once __DIR__ . '/database_conn.php';
 
 
 try {
@@ -42,7 +42,7 @@ if (isset($_GET['goodbye'])) {
 // Handle add to cart
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'], $_POST['product_id'])) {
     if (!$isLoggedIn) {
-        header('Location: /public/index.php?login_required=1');
+        header('Location: index.php?login_required=1');
         exit();
     }
 
@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_to_cart'], $_POST
                 $_SESSION['cart'][] = $item;
             }
 
-            header('Location: /public/index.php?added=1');
+            header('Location: index.php?added=1');
             exit();
         }
     } catch (PDOException $e) {
@@ -263,7 +263,7 @@ if (isset($_SESSION['cart'])) {
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                         <div class="navbar-nav mr-auto py-0">
-                            <a href="/public/index.php" class="nav-item nav-link active">Home</a>
+                            <a href="index.php" class="nav-item nav-link active">Home</a>
                             <a href="/api/cartpg.php" class="nav-item nav-link">Shopping Cart</a>
                             <a href="/api/contact.php" class="nav-item nav-link">Contact</a>
                         </div>
@@ -422,7 +422,7 @@ if (isset($_SESSION['cart'])) {
                     <div class="col-md-4 mb-5">
                         <h5 class="font-weight-bold text-dark mb-4">Quick Links</h5>
                         <div class="d-flex flex-column justify-content-start">
-                            <a class="text-dark mb-2" href="/public/index.php"><i class="fa fa-angle-right mr-2"></i>Home</a>
+                            <a class="text-dark mb-2" href="index.php"><i class="fa fa-angle-right mr-2"></i>Home</a>
                             <a class="text-dark mb-2" href="api/cartpg.php"><i class="fa fa-angle-right mr-2"></i>Shopping Cart</a>
                             <a class="text-dark" href="api/contact.php"><i class="fa fa-angle-right mr-2"></i>Contact Us</a>
                         </div>
