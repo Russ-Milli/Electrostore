@@ -18,7 +18,7 @@
     },
     {
       "source": "/assets/img/(.*)",
-      "destination": "/public/assets/img/$1"
+      "destination": "/public/img/$1"
     },
     {
       "source": "/assets/lib/(.*)",
